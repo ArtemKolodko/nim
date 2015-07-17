@@ -1,0 +1,114 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    background-image: url('../images/bamboo.jpg');
+}
+
+body {
+    font-family: Verdana,Geneva,sans-serif;
+}
+
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.noselect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.mainWrapper {
+    margin: 15px auto;
+    width: 879px;
+    position: relative;
+}
+
+.mainWrapper .mainWrapper__column {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.mainWrapper .column1 {
+
+}
+
+.mainWrapper .column2 {
+    position: relative;
+    margin-left:275px;
+}
+
+.bottomContent {
+    margin-top: 15px;
+}
+
+.bottomContent #profileDiv {
+    background-color: white;
+}
+
+.bottomContent #profileDiv .pdSendMsgPanelPadding {
+    font-size: 14px;
+}
+
+.closeImage {
+    float: right;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.mainWrapper .gameSquare {
+    background-color: white;
+    border-left: 1px solid #a8a8a8;
+    border-right: 1px solid #a8a8a8;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+#playerListWrapper, .mainWrapper .gameSquare, #chatWrapper, #profileWrapper, #ratingWrapper, #historyWrapper {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+#profileWrapper {
+    background-color: white;
+    padding: 10px;
+    display: none;
+    border: 1px solid #a8a8a8;
+    font-size: 12px;
+}
+
+.canvas-status
+{
+    position:absolute;
+    top: -9px;
+    text-align: center;
+    z-index: 100;
+}
+
+.canvas-status span
+{
+    display: none;
+    padding: 10px;
+    background-color:rgba(255, 255, 255, 0.9);
+    border: 1px solid #e4e4e4;
+    color:#069;
+    font-size:14px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.newgame-dialog, .myNotification {
+    width: 338px!important;
+}
+
+#bottomDataWrapper {
+    margin-top:15px;
+}

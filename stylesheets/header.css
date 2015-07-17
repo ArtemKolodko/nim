@@ -1,0 +1,214 @@
+
+#gameHeader {
+    margin-top: 15px;
+}
+
+#gameHeader .twoPlayers {
+    overflow: hidden;
+    position: relative;
+}
+
+.iconClose {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    width: 20px;
+    top: 25px;
+    display: none;
+}
+
+#gameHeader .onePlayer {
+    width: 245px;
+    overflow: hidden;
+    margin-top: 5px;
+    font: 1em/1.25 "PT Sans",sans-serif;
+    position: relative;
+}
+
+#gameHeader .onePlayer .onePlayer__additional {
+    font-size: 13px;
+    color: gray;
+}
+
+#gameHeader .onePlayer .onePlayer__additional .points_number {
+    font-size: 16px;
+}
+
+#gameHeader .onePlayer .onePlayer__rank {
+    color: #AAA;
+    margin-left: 2px;
+    font-size: 12px;
+}
+
+#gameHeader .onePlayer .onePlayer__timer {
+    position: absolute;
+    text-align: center;
+    font-family: Linear,"Helvetica Neue",Arial;
+    font-size: 13px;
+    top: 0;
+    color: rgb(68, 68, 68);
+    display: block;
+    font-weight: 700;
+    margin-top: 2px;
+    display: none;
+}
+
+#gameHeader .onePlayer .onePlayer__timer.red_timer {
+    color: rgb(239, 65, 53)
+}
+
+
+.onePlayer.floatL .onePlayer__timer{
+    left: 3px;
+}
+
+.onePlayer.floatR .onePlayer__timer{
+    right: 3px;
+}
+
+.timeWrapper {
+    margin-top: 5px;
+    position: absolute;
+    top: 30px;
+    width: 100%;
+}
+
+.timeWrapper .time {
+    font-size: 16px;
+    color: green;
+    font-family: Linear,"Helvetica Neue",Arial;
+    font-weight: bold;
+}
+
+#gameHeader .gameInfo {
+    text-align: center;
+    margin-bottom: 5px;
+    position: relative;
+    height: 50px;
+}
+
+.gameInfo .status {
+    width: 100%;
+    position: absolute;
+    margin-top: 5px;
+}
+
+#gameHeader .gameInfo .score {
+    padding-top: 5px;
+    font: 24px/24px 'PT Sans',Arial;
+}
+
+
+.color_square {
+    display: inline-block;
+}
+
+.stones .color_square {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 6px;
+    border: 1px solid #AAA;
+}
+
+.stones .color_square.color_square__black {
+    background-color: black;
+}
+
+.stones .color_square.color_square__white {
+    background-color: white;
+}
+
+.board_xo_colored .color_square {
+
+}
+
+.board_xo .color_square.color_square__black:after, .board_xo_colored .color_square.color_square__black:after {
+    content: "X"
+}
+
+.board_xo .color_square.color_square__white:after , .board_xo_colored .color_square.color_square__white:after {
+    content: "O"
+}
+
+.auto_turn {
+    display: inline-block;
+    color: #069;
+    font-size: 80%;
+}
+
+.floatL {
+    float: left !important;
+}
+
+.floatR {
+    float: right !important;
+}
+
+#gameHeader .onePlayer.floatR {
+    text-align: center;
+}
+
+#gameHeader .onePlayer.floatL {
+    text-align: center;
+}
+
+#gameHeader .status .status_text {
+    font-family: Verdana;
+    font-size: 18px;
+}
+
+#gameHeader .status .status_yourMove {
+    color:green;
+}
+
+#gameHeader .status .status_rivalMove {
+    color:#C42E21;
+}
+
+#gameHeader .redcross {
+    color: red;
+    font-size: 12px;
+    background-image: url(../images/stop_20.png);
+    background-size: 12px;
+    width: 12px;
+    height: 12px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.nofocus {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: 2;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: 2;
+
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: 2;
+    color: #00f;
+}
+
+@-moz-keyframes blinker {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1.0; }
+}

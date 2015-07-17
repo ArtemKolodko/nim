@@ -1,0 +1,84 @@
+.menu-wrap {
+    border-bottom: 1px solid #b5b5b5;
+}
+
+.menu-wrap a {
+    text-decoration: none;
+    color: #000000;
+    font-family: Verdana;
+}
+
+.menu-header {
+    border: 3px solid #413632;
+    border-radius: 2px 2px 0px 0px;
+    margin-bottom: 2px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.menu-buttons {
+    display: table;
+    border-spacing: 2px;
+    border: none;
+    width: 100%;
+}
+
+.menu-buttons__bottom {
+    /*display: inline;*/
+    display: table;
+}
+
+.menu-buttons a {
+    height: 38px;
+    font-size: 8pt;
+    border: 1px solid #b5b5b5;
+    border-radius: 4px;
+    background: #fbfbfb;
+    cursor: pointer;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+.menu-buttons a.active{
+    background-color: #f7f791!important;
+}
+
+.menu-buttons__top a, .menu-buttons__bottom a {
+    width:300px;
+    position: relative;
+}
+
+.menu-header .titleBandLink{
+    font-size: 10pt;
+    float: none!important;
+}
+
+.menu-header a:last-child {
+
+}
+
+.inputTextField {
+    min-height: 0px!important;
+}
+
+#list-filter-search {
+    padding: 0px 4px!important;
+    font-size: 12px;
+}
+
+.menu-buttons a.disabled {
+    color:gray;
+    cursor: default;
+}
+
+.menu-buttons__bottom .plus_placement {
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    background-color: green;
+    color: white;
+    border-radius: 8px;
+    padding: 2px;
+    font-size: 10px;
+}

@@ -1,0 +1,65 @@
+/*
+	Updated for current game lib and common elements styles
+*/
+
+#gbShow {
+    color:black!important;
+}
+
+.bottomPanel {
+    margin-top: 10px;
+    position: relative;
+}
+
+#userList {
+    position: absolute!important;
+    top: 20px;
+
+}
+
+#v6Chat {
+    position: absolute!important;
+    top: 345px;
+}
+
+#v6Chat .messagesWrap {
+    height: 262px;
+    max-height: 262px;
+}
+
+#welcomePanel {
+    margin-top: 118px!important;
+}
+
+#chat-rules {
+    left: 338px!important;
+}
+
+.ui-widget-overlay.ui-front {
+    background: none!important;
+}
+
+.body-wrap__VK {
+    overflow-y:auto!important;
+    height: 100%!important;
+}
+
+.body-wrap__VK body {
+    overflow-x: hidden;
+}
+
+.body-wrap__VK #content_wrapper {
+    margin-top:5px;
+    position: relative;
+}
+
+.body-wrap__VK  #userList {
+    top: 5px;
+}
+
+.body-wrap__VK #v6Chat {
+    top: 330px;
+}
+
+
+
