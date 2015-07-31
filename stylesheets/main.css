@@ -86,7 +86,7 @@ ul {
 .canvas-status
 {
     position:absolute;
-    top: -9px;
+    top: 20px;
     text-align: center;
     z-index: 100;
 }

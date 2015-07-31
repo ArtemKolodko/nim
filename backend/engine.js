@@ -8,38 +8,45 @@ module.exports = {
     getUsersScores: function(room, result){
         return result;
     },
-    doTurn: function(room, user, turn){
+    doTurn: function(room, user, turn, type){
+        if(type == 'turn') {
+            var field = room.data.field;
+            field.removeStones(turn.turn);
+            turn.list = field.getList();
+        }
+
         return turn;
     },
 
     getGameResult: function(room, user, turn, type) {
-        var winner = null;
+        var field = room.data.field;
+        var result = null;
+        var gameOver = field.isGameOver();
 
         if(type == 'timeout') {
             return {
-                winner: null,
-                save:   false
+                winner: room.getOpponent(user),
+                action: 'timeout'
             }
         }
 
-        if(true) {
-            winner = user;
-        } else {
-            for (var i = 0; i < room.players.length; i++) {
-                if(room.players[i] != user) winner = room.players[i];
+        if(gameOver) {
+            result = {
+                winner: user
             }
         }
 
-        return winner;
+        return result;
 
         throw new Error('can not compute winner! room:' + room.id + ' result: ' + turn.result);
     },
     // перед roundStart
     initGame: function (room) {
-        for (var i = 0; i < room.players.length; i++) {
-            room.data[userId].field = new Field();
-        }
 
+        console.log("START", room.inviteData.mode == "marienbad");
+
+        room.data.field = new Field(room.inviteData.mode == "marienbad" ? [1,3,5,7] : undefined);
+        room.inviteData.field = room.data.field.getList();
         return {
             inviteData: room.inviteData
         }
@@ -57,7 +64,7 @@ module.exports = {
     },
     userEvent: function(room, user, event) {
 
-        var field = room.data[user.userId].field;
+        var field = room.data.field;
         event.response = "secure data";
 
         return [

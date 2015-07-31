@@ -12,6 +12,9 @@
                 <div class="stonesLine stonesLine_3" data-line="3"></div>
                 <div class="stonesLine stonesLine_4" data-line="4"></div>
             </div>
+            <div class="gameOverMessages" style="display: none">
+
+            </div>
         </div>
     </div>
 

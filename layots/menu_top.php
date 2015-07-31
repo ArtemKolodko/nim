@@ -24,8 +24,10 @@
 
     <div class="menu-buttons menu-buttons__singlegame menu-buttons__top noselect">
         <a class="button_leavegame" data-value="6" style="display: none;">Покинуть игру</a>
-        <a data-value="1" class="takeback disabled">Ход назад<span class="counter"></span></a>
-        <a data-value="2" class="takeforward disabled">Ход вперед<span class="counter"></span></a>
+        <a data-value="1" class="takeback disabled" style="display: none;">Ход назад<span class="counter"></span></a>
+        <a data-value="2" class="takeforward disabled" style="display: none;">Ход вперед<span class="counter"></span></a>
+        <a data-value="8" class="mode mode_marienbad active">Мариенбад<span class="counter"></span></a>
+        <a data-value="9" class="mode mode_nim">Ним 5 рядов<span class="counter"></span></a>
         <a class="button_restart" data-value="7">Начать сначала</a>
         <a class="button_newgame" data-value="3">Новая игра</a>
         <a class="button_draw" data-value="4" style="display: none;">Предложить ничью</a>

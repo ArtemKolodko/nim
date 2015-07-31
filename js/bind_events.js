@@ -53,8 +53,12 @@ $(document).on("click", ".menu-buttons__top a", function() {
         case 7:
             if(game.type == "single") {
                 game.computer__restartGame();
-            }
-        break;
+            } break;
+
+        case 8: case 9:
+            if(game.type == "single") {
+                game.setMode(index == 8 ? "marienbad" : "nim");
+            } break;
     }
 });
 
@@ -74,14 +78,16 @@ $(document).on("click", ".menu-buttons__bottom a", function() {
 });
 
 $(document).on("click", ".stonesLine .stone:visible", function() {
-    if(game.isYourTurn) {
-        game.onCellClicked({
-            stonesToRemove: $(this).nextAll(".visible").length + 1,
-            row: $(this).parent().attr("data-line")
-        });
-    } else {
+
+    var stones = $(this).nextAll(".visible");
+    if(!game.isYourTurn) {
         throw new Error("Not your turn!");
+        return;
     }
+    game.onCellClicked({
+        stonesToRemove: stones.length + 1,
+        row: parseInt($(this).parent().attr("data-line"))
+    });
 });
 
 $(document).on("mouseover", ".stonesLine .stone:visible", function() {

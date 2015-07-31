@@ -1,3 +1,5 @@
+/*https://www.behance.net/gallery/4644061/Beehive-Matches*/
+
 .fieldWrapper {
     display: table;
     margin: 0 auto;
@@ -7,7 +9,7 @@
     margin-bottom: 30px;
     position: relative;
     height: 400px;
-    background-image: url(../images/goboard.jpg);
+    /*background-image: url(../images/goboard.jpg);*/
 }
 
 .fieldWrapper .results.results_player1 {
@@ -68,7 +70,7 @@
 .linesWrapper .stone {
     position: relative;
     display: inline-block;
-    background-image: url('../images/sprite.png');
+    background-image: url(../images/match_1_50.png);
     width: 50px;
     height: 50px;
     background-repeat: no-repeat;
@@ -86,9 +88,9 @@
 }
 
 .linesWrapper .stone.stone_hovered {
-    -webkit-filter: brightness(300%);
-    filter: brightness(300%);
-    -moz-filter: brightness(300%);
+    -webkit-filter: brightness(150%);
+    filter: brightness(150%);
+    -moz-filter: brightness(150%);
 }
 
 .linesWrapper .stone .digit {
@@ -96,9 +98,10 @@
     font-size: 18px;
     color: black;
     text-align: center;
-    width: 42px;
+    width: 50px;
     height: 40px;
-    top: 10px;
+    top: 15px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 .linesWrapper .stone.removed {

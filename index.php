@@ -9,7 +9,7 @@
     <?php
         $gameId = 32;
         include_once("php/auth.php");
-        $ver = $v."_0.0.1";
+        $ver = $v."_0.1.2";
         include_once("php/include.php");
     ?>
 </head>

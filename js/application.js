@@ -22,12 +22,12 @@ function StartApp() {
         generateInviteText: function(invite){
             console.log("invite: ", invite);
 
-            var fieldInformation = " на поле <span style='color: #069'>"+invite.data.width+"x"+invite.data.height+"</span>, количество мин: от "+(invite.data.minesNumber-2) + " до "+(invite.data.minesNumber+2);
+            var fieldInformation = "";
 
             var rank = invite.from.getRank() != "—" ? " ("+invite.from.getRank()+" место в рейтинге)" : " (отсутствует в рейтинге)";
             var inviteStr = 'Игрок «<span style="font-weight: bold;">' + invite.from.userName + '</span>»'+
                 rank+' предлагает сыграть партию в ' +
-                client.modesAlias[invite.data.mode] +
+                '<span style="color:#069;">'+client.modesAlias[invite.data.mode] + '</span>'+
                 fieldInformation;
 
             return inviteStr;
@@ -54,7 +54,7 @@ function StartApp() {
             turn: {
                 src: '//logic-games.spb.ru/v6-game-client/app/audio/v6-game-turn.ogg',
                 volume: 0.5,
-                enable: false
+                enable: true
             },
             win: {
                 src: '//logic-games.spb.ru/v6-game-client/app/audio/v6-game-win.ogg'
@@ -70,9 +70,7 @@ function StartApp() {
             }
         },
         settingsTemplate: settingsTemplate,
-        settings: {
-            fieldTemplate: "20x20"
-        }
+        settings: {}
     };
 
     if(_isLocal) {
@@ -91,6 +89,11 @@ function StartApp() {
         console.log('main;', 'login', data.userId, data.userName, data);
         var you =  client.getPlayer();
         game.onLogin(data);
+    });
+
+    client.on('mode_switch', function( data ) {
+        console.log('main;','mode_switch:', data);
+        game.onModeSwitch(data);
     });
 
     client.gameManager.on('game_start', function(data){

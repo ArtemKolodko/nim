@@ -5,12 +5,16 @@ function Stone() {
     };
 };
 
-function Field() {
+function Field(list) {
     this.sum = 40;
     this.lines = 5;
     this.map = [];
+    this.enabled = true;
+    this.createNew(list);
+};
 
-    this.createNew();
+Field.prototype.enable = function(e) {
+    this.enabled = e;
 };
 
 Field.prototype.restart = function() {
@@ -21,7 +25,7 @@ Field.prototype.restart = function() {
     this.actuate();
 };
 
-Field.prototype.createNew = function() {
+Field.prototype.createNew = function(list) {
     function _getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -39,12 +43,12 @@ Field.prototype.createNew = function() {
             [10, 8, 6, 8, 8], [5, 10, 10, 5, 10]
         ];
         var randPattern = patterns[_getRandomInt(0, patterns.length-1)];
-        console.log(randPattern);
+        //console.log(randPattern);
         return __shuffle(randPattern);
     };
 
     this.map = [];
-    var list = _randomSum(this.sum, this.lines);
+    var list = list ? list : _randomSum(this.sum, this.lines);
 
     for(var i=0; i < this.lines; i++) {
         this.map[i] = [];
@@ -91,6 +95,8 @@ Field.prototype.removeStones = function(data) {
             }
         }
         this.actuate();
+    } else {
+        console.log("Cannot remove stones ", data);
     }
 };
 
@@ -119,14 +125,6 @@ Field.prototype.actuate = function() {};
 // Client-side
 Field.prototype.actuate = function() {
 
-    for(var i=0; i < this.map.length; i++) {
-        var line = $(".stonesLine_"+i);
-        line.empty();
-        for(var j=0; j < this.map[i].length; j++) {
-            var classVisible = this.map[i][j].visible ? "visible" : "removed";
-            line.append('<div class="stone '+classVisible+'"><div class="digit"></div></div>');
-        }
-    }
 };
 
 module.exports = {

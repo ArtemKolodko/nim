@@ -4,13 +4,14 @@ module.exports = {
     pingTimeout:100000,
     pingInterval:10000,
     logLevel:1,
-    turnTime: 60*60,
-    minTurns: 0,
+    turnTime: 30,
+    minTurns: 2,
     maxTimeouts: 1,
     adminList: ["18136", "144", "40", "448039"],
     //mode: 'develop',
-    gameModes: ['nim'],
-    modesAlias:{'nim':'Ним'}, // visible client mode alias
+    gameModes: ['marienbad', 'nim'],
+    modesAlias: {'marienbad': 'Мариенбад', 'nim':'Ним'}, // visible client mode alias
+
     ratingElo: true,        // compute rating elo flag
     mongo:{ // mongodb configuration
         host: '192.168.250.40',

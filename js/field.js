@@ -1,16 +1,26 @@
 function Stone() {
     this.visible = true;
+
     this.setVisible = function(v) {
         this.visible = v;
     };
+
+    this.getHTML = function() {
+        var classVisible = this.visible ? "visible" : "removed";
+        return '<div class="stone '+classVisible+'"><div class="digit"></div></div>';
+    };
 };
 
-function Field() {
+function Field(list) {
     this.sum = 40;
     this.lines = 5;
     this.map = [];
+    this.enabled = true;
+    this.createNew(list);
+};
 
-    this.createNew();
+Field.prototype.enable = function(e) {
+    this.enabled = e;
 };
 
 Field.prototype.restart = function() {
@@ -18,10 +28,10 @@ Field.prototype.restart = function() {
     this.eachStone(function(x, y) {
         self.map[x][y].setVisible(true);
     });
-    this.actuate();
+    this.actuate({clear: true});
 };
 
-Field.prototype.createNew = function() {
+Field.prototype.createNew = function(list) {
     function _getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -39,12 +49,12 @@ Field.prototype.createNew = function() {
             [10, 8, 6, 8, 8], [5, 10, 10, 5, 10]
         ];
         var randPattern = patterns[_getRandomInt(0, patterns.length-1)];
-        console.log(randPattern);
+        //console.log(randPattern);
         return __shuffle(randPattern);
     };
 
     this.map = [];
-    var list = _randomSum(this.sum, this.lines);
+    var list = list ? list : _randomSum(this.sum, this.lines);
 
     for(var i=0; i < this.lines; i++) {
         this.map[i] = [];
@@ -52,7 +62,7 @@ Field.prototype.createNew = function() {
             this.map[i][j] = new Stone();
         }
     }
-    this.actuate();
+    this.actuate({clear: true});
 };
 
 Field.prototype.getRowData = function(index) {
@@ -80,6 +90,8 @@ Field.prototype.getList = function() {
     return list;
 };
 
+
+
 Field.prototype.removeStones = function(data) {
     if(data.stonesToRemove && data.row !== null) {
 
@@ -90,7 +102,9 @@ Field.prototype.removeStones = function(data) {
                 row[i].setVisible(false);
             }
         }
-        this.actuate();
+        this.actuate(data);
+    } else {
+        console.log("Cannot remove stones ", data);
     }
 };
 
@@ -115,16 +129,32 @@ Field.prototype.eachStone = function(callback) {
 };
 
 Field.prototype.actuate = function() {};
+Field.prototype.animateRemoveStones = function() {};
 
 // Client-side
-Field.prototype.actuate = function() {
-
-    for(var i=0; i < this.map.length; i++) {
-        var line = $(".stonesLine_"+i);
-        line.empty();
-        for(var j=0; j < this.map[i].length; j++) {
-            var classVisible = this.map[i][j].visible ? "visible" : "removed";
-            line.append('<div class="stone '+classVisible+'"><div class="digit"></div></div>');
+Field.prototype.actuate = function(data) {
+    if(data.clear) {
+        for(var i=0; i < this.map.length; i++) {
+            var line = $(".stonesLine_"+i);
+            line.empty();
+            for(var j=0; j < this.map[i].length; j++) {
+                line.append(this.map[i][j].getHTML());
+            }
         }
+    } else {
+        console.log("Actuate", data);
+        if(data.stonesToRemove) {
+            var stones = $(".stonesLine_"+data.row + " .stone.visible");
+            var remove = stones.slice(Math.max(stones.length - data.stonesToRemove, 0));
+
+            for(var i=0 ; i < remove.length; i++) {
+                $(remove[i]).removeClass("visible").addClass("removed");
+            }
+
+        } else {
+            throw new Error("Wrong field data [field actuator]", data);
+        }
+
     }
+
 };

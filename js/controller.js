@@ -14,14 +14,28 @@ function SweeperController() {
     this.player2 = new FakePlayer();
     this.ai = new NimAI();
 
-    this.field = new Field();
+    this.field = new Field([1,3,5,7]);
     this.actuator = new HTMLActuator(this);
+
+    var self = this;
+    setTimeout(function() {
+        self.actuator.showCanvasStatus("Взявший последнюю спичку выигрывает",10*1000);
+    },500);
 };
 
 SweeperController.prototype.generateUserParams = function( ) {
     return {
 
     };
+};
+
+SweeperController.prototype.setMode = function(data) {
+    if(client.socket.isConnected) {
+        client.setMode(data);
+    } else {
+        this.actuator.showCanvasStatus("Отсутствует соединение с сервером");
+    }
+
 };
 
 SweeperController.prototype.setStatus = function(value) {
@@ -40,6 +54,7 @@ SweeperController.prototype.onCellClicked = function(data) {
 
         client.soundManager.playSound('turn');
 
+        data.player = this.player1;
         this.field.removeStones(data);
         if(this.isGameOver()) {
             this.setStatus(2);
@@ -51,22 +66,25 @@ SweeperController.prototype.onCellClicked = function(data) {
             }, 1500);
         }
 
+        this.actuator.hideCanvasStatus();
+
     } else if(this.type === "multiplayer") {
-        //this.sendTurn();
+        this.sendTurn(data);
     }
 
     this.setYourTurn(false);
+
 };
 
 SweeperController.prototype.sendTurn = function(turn) {
-    client.gameManager.sendEvent("turn", {
+    client.gameManager.sendTurn({
         turn: turn
     });
 };
 
 SweeperController.prototype.computer__newGame = function() {
     clearTimeout(this.aiTimeout);
-    this.field.createNew();
+    this.field.createNew(client.currentMode === "marienbad" ? [1,3,5,7] : undefined);
     this.setYourTurn(true);
 };
 
@@ -74,9 +92,7 @@ SweeperController.prototype.computer__makeMove = function() {
     var decision = this.ai.makeDecision(game.field.getList());
     if(decision) {
         decision.player = this.player2;
-        console.log("decision", decision);
         this.field.removeStones(decision);
-
         client.soundManager.playSound('turn');
 
         if(this.isGameOver()) {
@@ -146,23 +162,69 @@ SweeperController.prototype.onLogin = function(data) {
     this.actuator.player1.update(this.player1);
     game.actuator.player2.update(this.player2);
 };
+
+SweeperController.prototype.onModeSwitch = function(data) {
+    $(".mode").removeClass("active");
+    $(".mode_"+data).addClass("active");
+    if(this.type == "single") {
+        this.computer__newGame();
+        this.actuator.setScore(0,0);
+    }
+
+};
+
 SweeperController.prototype.gameStarted = function(data) {
+    clearTimeout(this.aiTimeout);
     this.setType("multiplayer");
+
+    if(client.currentMode != data.inviteData.mode) {
+        this.setMode(data.inviteData.mode);
+    }
+
     this.setPlayers(data.players);
 
     this.actuator.setScore(data.score[this.player1.userId], data.score[this.player2.userId]);
+    this.actuator.hideCanvasStatus();
 };
 SweeperController.prototype.roundStart = function(data) {
     this.dropField();
     this.dropProgress();
+
+    this.field.createNew(data.inviteData.field);
+    this.setYourTurn(data.first == this.player1);
 };
-SweeperController.prototype.onTurn = function() {};
-SweeperController.prototype.onSwitchPlayer = function() {};
+SweeperController.prototype.onTurn = function(data) {
+    this.field.removeStones(data.turn.turn);
+
+};
+SweeperController.prototype.onSwitchPlayer = function(data) {
+    this.setYourTurn(data.userId == this.player1.userId);
+};
 SweeperController.prototype.roundEnd = function(data) {
-    this.field.disable();
+    this.field.enable(false);
+
+    if(this.type == "multiplayer") {
+        var statusValue = data.winner == null ? 4 : data.winner == this.player1.userId ? 2 : 3;
+        this.setStatus(statusValue);
+
+    } else if(this.type == "spectator") {
+        var text = "";
+        if(data.result == "draw") {
+            text = "Ничья";
+        } else if(data.winner != null) {
+            if(data.winner == this.player1.userId) text = this.player1.userName + " выиграл партию";
+            else if(data.winner == this.player2.userId) text = this.player2.userName + " выиграл партию";
+        } else {
+            text = "Ничья";
+        }
+        this.actuator.showCanvasStatus(text, 5000);
+    }
+
     this.actuator.setScore(data.score[this.player1.userId], data.score[this.player2.userId]);
 };
 SweeperController.prototype.onLeaveGame = function() {
+    this.field.createNew(client.currentMode === "marienbad" ? [1,3,5,7] : undefined);
+    this.setYourTurn(true);
     this.setType("single");
     this.setPlayers([client.getPlayer(), new FakePlayer()]);
 

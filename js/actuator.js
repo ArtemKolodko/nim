@@ -45,15 +45,15 @@ function HTMLActuator(controller) {
 };
 
 HTMLActuator.prototype.typeSingle = function() {
-    $(".onePlayer.floatR, .button_leavegame, .button_draw, .button_throw, .onePlayer__additional, .results_player2, .timeWrapper").hide();
+    $(" .button_leavegame, .button_draw, .button_throw, .onePlayer__additional,.timeWrapper").hide();
     $(".button_newgame, .button_restart").show();
-    $(".gameInfo").css("visibility", "hidden");
+
 };
 
 HTMLActuator.prototype.typeMultiplayer = function() {
-    $(".onePlayer.floatR, .button_leavegame, .button_draw, .button_throw, .onePlayer__additional, .results_player2, .timeWrapper").show();
+    $(" .button_leavegame, .button_draw, .button_throw, .onePlayer__additional, .timeWrapper").show();
     $(".button_newgame, .button_restart").hide();
-    $(".gameInfo").css("visibility", "visible");
+
 };
 
 HTMLActuator.prototype.setScore = function( score1, score2 ) {
