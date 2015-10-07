@@ -1,8 +1,9 @@
 <?php include_once("menu_top.php"); ?>
 
-<div class="centerPanelWrapper">
+<div class="centerPanelWrapper" style="height: 629px;">
     <?php include_once("header.php"); ?>
     <div class="gameWrapper" style="position: relative;min-height: 533px;">
+
         <div class="canvas-status"><span onclick="game.actuator.hideCanvasStatus();"></span></div>
         <div class="fieldWrapper">
             <div class="linesWrapper noselect">
@@ -15,6 +16,7 @@
             <div class="gameOverMessages" style="display: none">
 
             </div>
+            <div class="giveTurn" style="display: none;"><span>Уступить ход</span></div>
         </div>
     </div>
 

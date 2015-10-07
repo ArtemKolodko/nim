@@ -112,3 +112,19 @@ ul {
 #bottomDataWrapper {
     margin-top:15px;
 }
+
+.giveTurn {
+    position: absolute;
+    left: 39%;
+    bottom: 30px;
+    cursor: pointer;
+}
+
+.giveTurn span {
+    border: 1px solid #222;
+    color: #069;
+    font-size: 19px;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+}

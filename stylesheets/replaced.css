@@ -2,6 +2,41 @@
 	Updated for current game lib and common elements styles
 */
 
+#game-description {
+    position: absolute;
+    width: 700px;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 9px;
+    display: none;
+    color: #444;
+    font-size: 8pt;
+    background: #fff;
+    z-index: 100000;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 0 1px #ccc;
+}
+
+#game-description .close_icon {
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#game-description h2 {
+    font-size: 10pt;
+    text-align: center;
+}
+#game-description ul {
+    list-style: square;
+    margin-left: 30px;
+}
+
+
 #gbShow {
     color:black!important;
 }
@@ -48,9 +83,13 @@
     overflow-x: hidden;
 }
 
-.body-wrap__VK #content_wrapper {
+.body-wrap__VK .mainWrapper {
     margin-top:5px;
     position: relative;
+}
+
+.body-wrap__VK .column2 {
+    margin-top: -13px;
 }
 
 .body-wrap__VK  #userList {

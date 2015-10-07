@@ -19,8 +19,9 @@ function SweeperController() {
 
     var self = this;
     setTimeout(function() {
-        self.actuator.showCanvasStatus("Взявший последнюю спичку выигрывает",10*1000);
-    },500);
+        self.actuator.showCanvasStatus("Разрешается брать любое количество спичек из любого ряда. Взявший последнюю спичку проигрывает",20*1000);
+        $(".giveTurn").show();
+    }, 500);
 };
 
 SweeperController.prototype.generateUserParams = function( ) {
@@ -55,12 +56,16 @@ SweeperController.prototype.onCellClicked = function(data) {
         client.soundManager.playSound('turn');
 
         data.player = this.player1;
+        data.isPlayer1 = true;
         this.field.removeStones(data);
         if(this.isGameOver()) {
-            this.setStatus(2);
-            this.actuator.setScore(parseInt($(".score__1").text())+1, $(".score__2").text());
-            client.soundManager.playSound('win');
+            this.setStatus(3);
+            this.actuator.setScore($(".score__1").text(), parseInt($(".score__2").text())+1);
+            client.soundManager.playSound('lose');
+
+            return;
         } else {
+            $(".giveTurn").hide();
             this.aiTimeout = setTimeout(function() {
                 self.computer__makeMove();
             }, 1500);
@@ -86,20 +91,23 @@ SweeperController.prototype.computer__newGame = function() {
     clearTimeout(this.aiTimeout);
     this.field.createNew(client.currentMode === "marienbad" ? [1,3,5,7] : undefined);
     this.setYourTurn(true);
+    $(".giveTurn").show();
 };
 
 SweeperController.prototype.computer__makeMove = function() {
     var decision = this.ai.makeDecision(game.field.getList());
     if(decision) {
         decision.player = this.player2;
+        decision.isPlayer1 = false;
         this.field.removeStones(decision);
         client.soundManager.playSound('turn');
 
         if(this.isGameOver()) {
-            this.setStatus(3);
-            this.actuator.setScore($(".score__1").text(), parseInt($(".score__2").text())+1);
+            this.setStatus(2);
+            this.actuator.setScore(parseInt($(".score__1").text())+1, $(".score__2").text());
+
             setTimeout(function() {
-                client.soundManager.playSound('lose');
+                client.soundManager.playSound('win');
             }, 100);
         } else {
             this.setYourTurn(true);
@@ -116,6 +124,8 @@ SweeperController.prototype.computer__restartGame = function() {
     clearTimeout(this.aiTimeout);
     game.field.restart();
     this.setYourTurn(true);
+
+    $(".giveTurn").show();
 };
 
 SweeperController.prototype.dropField = function() {
@@ -192,10 +202,14 @@ SweeperController.prototype.roundStart = function(data) {
 
     this.field.createNew(data.inviteData.field);
     this.setYourTurn(data.first == this.player1);
+
+    this.actuator.showCanvasStatus("Взявший последнюю спичку проигрывает",5*1000);
+
+    $(".giveTurn").hide();
 };
 SweeperController.prototype.onTurn = function(data) {
+    data.turn.turn.isPlayer1 = data.user == this.player1.userId;
     this.field.removeStones(data.turn.turn);
-
 };
 SweeperController.prototype.onSwitchPlayer = function(data) {
     this.setYourTurn(data.userId == this.player1.userId);
@@ -230,6 +244,7 @@ SweeperController.prototype.onLeaveGame = function() {
 
     this.actuator.hideCanvasStatus();
     this.actuator.setScore(0, 0);
+    $(".giveTurn").show();
 
 };
 SweeperController.prototype.gameLoad = function(data) {};

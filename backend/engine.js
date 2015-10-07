@@ -32,7 +32,7 @@ module.exports = {
 
         if(gameOver) {
             result = {
-                winner: user
+                winner: room.getOpponent(user)
             }
         }
 
@@ -43,7 +43,7 @@ module.exports = {
     // перед roundStart
     initGame: function (room) {
 
-        console.log("START", room.inviteData.mode == "marienbad");
+        //console.log("START", room.inviteData.mode == "marienbad");
 
         room.data.field = new Field(room.inviteData.mode == "marienbad" ? [1,3,5,7] : undefined);
         room.inviteData.field = room.data.field.getList();

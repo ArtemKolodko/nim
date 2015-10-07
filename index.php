@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="description" content="Сапер - онлайн игра для двух соперников. История, рейтинги."/>
     <meta name="robots" content="all"/>
-    <link rel="shortcut icon" href="/minesweeper/favicon.ico" type="image/x-icon">
+    <!--<link rel="shortcut icon" href="/minesweeper/favicon.ico" type="image/x-icon">-->
     <?php
         $gameId = 32;
         include_once("php/auth.php");
-        $ver = $v."_0.1.2";
+        $ver = $v."_0.2.3";
         include_once("php/include.php");
     ?>
 </head>

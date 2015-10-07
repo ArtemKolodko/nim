@@ -3,8 +3,9 @@
 .fieldWrapper {
     display: table;
     margin: 0 auto;
-    border: 1px solid #C0C0C0;
-    width: 600px;
+    border-top: 1px solid #C0C0C0;
+    border-bottom: 1px solid #C0C0C0;
+    width: 602px;
     margin-top: 20px;
     margin-bottom: 30px;
     position: relative;
@@ -81,6 +82,7 @@
 .linesWrapper {
     margin: 100px auto;
     width: 500px;
+    position: relative;
 }
 
 .linesWrapper .stonesLine {
@@ -91,11 +93,12 @@
     -webkit-filter: brightness(150%);
     filter: brightness(150%);
     -moz-filter: brightness(150%);
+    -webkit-filter: drop-shadow(3px 5px 2px #f4dc9c);
 }
 
 .linesWrapper .stone .digit {
     position: absolute;
-    font-size: 18px;
+    font-size: 24px;
     color: black;
     text-align: center;
     width: 50px;
@@ -106,4 +109,10 @@
 
 .linesWrapper .stone.removed {
     visibility: hidden;
+}
+
+.linesWrapper .stone.removed.ghost {
+    position: absolute;
+    visibility: visible;
+    opacity: 0.6;
 }

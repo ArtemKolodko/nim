@@ -87,8 +87,10 @@ HTMLActuator.prototype.showCanvasStatus = function (text, latency) {
     var fadeInDuration = visibleOnPage ? 0 : 400;
     clearTimeout(this.canvasStatusTimeout);
 
-    $(".canvas-status span").html(text).fadeIn({duration: fadeInDuration});
-    $(".canvas-status").fadeIn({duration: fadeInDuration}).css("left", $(".centerPanelWrapper").width()/2-($(".canvas-status span").width()/2+10));
+    $(".canvas-status span").html(text).show().css("display","block");
+    $(".canvas-status").fadeIn({duration: fadeInDuration})
+        .css("left", $(".centerPanelWrapper").width()/2-($(".canvas-status span").width()/2+10))
+        .css("display","block");
     this.canvasStatusTimeout = setTimeout(this.hideCanvasStatus, latency);
 };
 
